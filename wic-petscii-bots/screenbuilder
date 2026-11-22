@@ -1,0 +1,56 @@
+#!/usr/bin/env php
+<?php
+
+$input=file("tune.asm");
+$data=json_decode(file_get_contents("tune.json"),true);
+
+extract($data);
+
+
+$text="
+
+
+          PETSCII BOT VIEWER           
+
+
+
+
+
+
+ Graphics:
+  Fantastic Italian Research Enterprise
+  https://csdb.dk/release/?id=231072
+
+ Tune:
+  Title  : $sid_name
+  Author : $sid_author
+  Release: $sid_released
+
+ Code:
+  2023 Schorsch3000
+  
+  
+  
+        Press any key to start         ";
+
+$lines=explode("\n",$text);
+while(count($lines)<25){
+    $lines[]="";
+}
+$lines=array_map(function($line){
+    return "!text \"".str_pad($line,40," ",STR_PAD_RIGHT)."\"";
+},$lines);
+echo "!convtab scr\n";
+echo implode("\n",$lines);
+echo "\n!convtab raw\n";
+?>
+!fill 40*10,1
+!fill 40*1,11
+!fill 40*1,15
+!fill 40*2,6
+!fill 40*1,11
+!fill 40*4,15
+!fill 40*1,11
+!fill 40*3,15
+!fill 40*2,1
+

@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+
+name="$(basename "$PWD")"
+
+
+
+
+
+#this is only used for making changes to screen and sid you dont need this
+#if [ -f "${1:-}" ]; then
+#	cp "$1" tune.sid
+#fi
+#
+#sidinfo -p sid_ tune.sid | tee tune.asm
+#sidinfo -f json -p sid_ tune.sid >tune.json
+#./screenbuilder >screen.asm
+
+
+acme -I ../wic64-library --color -l labels "$name".asm
+
+
+start_address="$(grep <labels -E "\sstart\s+=" | sed 's/.*= \$//' | sed 's/\s.*//')"
+exomizer sfx 0x"$start_address" -B -n -o "$name-ex".prg -- "$name".prg
+ls -lsa "$name"*
+
+c1541 -format "$name,11" d64 "$name".d64 -attach "$name".d64 8 \
+	-write "$name-ex.prg" "$name"
+
+
+
+# use this for testing in vice
+#pgrep "x64" || x64 -remotemonitor &>/dev/null&
+#wait-for localhost:6510
+#(echo "autostart \"$(realpath "$name".d64)\"" | timeout 1 nc localhost 6510) &>/dev/null
+
+
+
+# use this for testing via u1541
+#u1541 -d "$name.d64"
+
+mkdir dist -p
+rm -rf dist/*
+cp "$name.d64" dist/
+cp "$name-ex.prg" dist/"$name".prg
+export sid_name
+sid_name="$(jq <tune.json -r .sid_name)"
+

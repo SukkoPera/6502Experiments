@@ -1,0 +1,14 @@
+sid_magicID     = "PSID"
+sid_version     = 2
+sid_offset      = $7e
+sid_loadAddress = $7200
+sid_initAddress = $7200
+sid_playAddress = $7203
+sid_songs       = 1
+sid_startSong   = 1
+sid_speed       = %00000000000000000000000000000000
+sid_name        = "Stomp"
+sid_author      = "Kamil Wolnikowski (Jammer)"
+sid_released    = "2018 EXclusive ON"
+sid_dataSize    = $8da
+sid_filename    = "tune.sid"

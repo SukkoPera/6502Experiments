@@ -1,0 +1,16 @@
+{
+    "sid_magicID": "PSID",
+    "sid_version": 2,
+    "sid_offset": 126,
+    "sid_loadAddress": 29184,
+    "sid_initAddress": 29184,
+    "sid_playAddress": 29187,
+    "sid_songs": 1,
+    "sid_startSong": 1,
+    "sid_speed": 0,
+    "sid_name": "Stomp",
+    "sid_author": "Kamil Wolnikowski (Jammer)",
+    "sid_released": "2018 EXclusive ON",
+    "sid_dataSize": 2266,
+    "sid_filename": "tune.sid"
+}
